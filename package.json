@@ -1,8 +1,8 @@
 {
   "name": "xmlgen",
   "version": "1.0.0",
-  "description": "Generate svg from json data.",
-  "main": "lib",
+  "description": "Generate xml file from data.",
+  "main": "xmlgen.js",
   "scripts": {
     "build": "./ci/build.js",
     "test": "./ci/test.js",
@@ -28,9 +28,10 @@
   },
   "homepage": "https://github.com/okunishinishi/node-svggen#readme",
   "dependencies": {
+    "argx": "^1.1.6",
     "async": "^1.4.2",
-    "coz-tmpl": "^1.0.3",
-    "randomval": "^1.0.2"
+    "js2xmlparser": "^1.0.0",
+    "writeout": "^1.2.1"
   },
   "devDependencies": {
     "ape-covering": "^1.0.8",
@@ -41,6 +42,7 @@
     "ape-tmpl": "^1.0.9",
     "ape-updating": "^1.0.1",
     "coz": "^3.0.13",
+    "coz-tmpl": "^1.0.3",
     "injectmock": "^1.1.2"
   }
 }
