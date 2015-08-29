@@ -1,6 +1,6 @@
 /**
  * Generate xml file.
- * @function xmlgen
+ * @function writexml
  * @param {string} filename - Filename to generate.
  * @param {string} elm - Root element name.
  * @param {object} data - Element data.
@@ -14,8 +14,8 @@ var js2xml = require('js2xmlparser'),
     writeout = require('writeout'),
     argx = require('argx');
 
-/** @lends xmlgen */
-function xmlgen(filename, elm, data, options, callback) {
+/** @lends writexml */
+function writexml(filename, elm, data, options, callback) {
     var args = argx(arguments);
     filename = args.shift('string');
     elm = args.shift('string');
@@ -23,16 +23,16 @@ function xmlgen(filename, elm, data, options, callback) {
     callback = args.pop('function') || argx.noop;
     options = args.pop('object') || {};
 
-    var xml = xmlgen.string(elm, data);
+    var xml = writexml.string(elm, data);
     writeout(filename, xml, {
         mkdirp: options.mkdirp
     }, callback);
 }
 
-xmlgen.string = function (elm, data) {
+writexml.string = function (elm, data) {
     return js2xml(elm || 'root', data, {
         useCDATA: true
     });
 };
 
-module.exports = xmlgen;
+module.exports = writexml;

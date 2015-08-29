@@ -1,14 +1,14 @@
 /**
- * Test for xml gen.
+ * Test for writexml.
  */
 
 "use strict";
 
-var xmlgen = require('./xmlgen');
+var writexml = require('./writexml');
 
 exports['Get as string.'] = function (test) {
 
-    var xml = xmlgen.string("baz", {
+    var xml = writexml.string("baz", {
         foo: 'bar'
     });
     test.ok(xml);
@@ -18,7 +18,7 @@ exports['Get as string.'] = function (test) {
 
 exports['Generate xml file.'] = function (test) {
     var filename = __dirname + '/tmp/foo/barbaz.txt';
-    xmlgen(filename, "this", {
+    writexml(filename, "this", {
         foo: 'bar'
     }, {
         mkdirp: true

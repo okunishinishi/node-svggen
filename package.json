@@ -1,8 +1,8 @@
 {
-  "name": "xmlgen",
-  "version": "1.0.0",
+  "name": "writexml",
+  "version": "1.1.1",
   "description": "Generate xml file from data.",
-  "main": "xmlgen.js",
+  "main": "writexml.js",
   "scripts": {
     "build": "./ci/build.js",
     "test": "./ci/test.js",
