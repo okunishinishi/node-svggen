@@ -5,34 +5,34 @@
  * @param {string} elm - Root element name.
  * @param {object} data - Element data.
  * @param {object} options - Optional settings.
- * @param {function} callback - Callback when done.
+ * @return {Promise}
  */
 
-"use strict";
+'use strict'
 
-var js2xml = require('js2xmlparser'),
-    writeout = require('writeout'),
-    argx = require('argx');
+const js2xml = require('js2xmlparser')
+const writeout = require('writeout')
+const co = require('co')
+const argx = require('argx')
 
 /** @lends writexml */
-function writexml(filename, elm, data, options, callback) {
-    var args = argx(arguments);
-    filename = args.shift('string');
-    elm = args.shift('string');
-    data = args.shift('object');
-    callback = args.pop('function') || argx.noop;
-    options = args.pop('object') || {};
-
-    var xml = writexml.string(elm, data);
-    writeout(filename, xml, {
-        mkdirp: options.mkdirp
-    }, callback);
+function writexml (filename, elm, data, options = {}) {
+  let args = argx(arguments)
+  if (args.pop('function')) {
+    throw new Error('Callback is no longer supported. Use promise interface instead.')
+  }
+  let xml = writexml.string(elm, data)
+  return co(function * () {
+    yield writeout(filename, xml, {
+      mkdirp: options.mkdirp
+    })
+  })
 }
 
 writexml.string = function (elm, data) {
-    return js2xml(elm || 'root', data, {
-        useCDATA: true
-    });
-};
+  return js2xml(elm || 'root', data, {
+    useCDATA: true
+  })
+}
 
-module.exports = writexml;
+module.exports = writexml
